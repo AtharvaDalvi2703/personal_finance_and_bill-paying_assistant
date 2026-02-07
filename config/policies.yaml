@@ -1,37 +1,39 @@
-# Policy Configuration for Subscription Guardian
+# Policy Configuration for Subscription Guardian (India Edition)
 
 # Global Rules
 global_rules:
-  # Any transaction above this amount requires explicit user confirmation
-  require_confirmation_above: 50.0
+  # Any transaction above this amount requires explicit user confirmation (INR)
+  require_confirmation_above: 2000.0
   # Log all actions taken by agents for auditing purposes
   audit_all_actions: true
 
 # Owner Policies (Default User)
 owner_policies:
-  # Maximum amount the agent can cancel autonomously without confirmation
-  max_cancellation_amount: 20.0
+  # Maximum amount the agent can cancel autonomously without confirmation (INR)
+  max_cancellation_amount: 800.0
   
   # Categories allowed for autonomous management
   allowed_categories:
     - "streaming"
+    - "food_delivery"
     - "gaming"
     
   # Categories blocked from autonomous cancellation (must be manually reviewed)
   blocked_categories:
     - "utilities"
     - "insurance"
+    - "investments"
 
-# Delegation Policies (e.g., Roommates, Family Members)
+# Delegation Policies (e.g., Roommate, Family Members)
 delegation_policies:
   roommate:
     # Subscriptions the delegate is allowed to modify/access
     allowed_subscriptions:
       - "spotify"
-      - "hulu"
+      - "zomato gold"
     
-    # Maximum monthly spend allowance for new subscriptions
-    max_amount: 15.0
+    # Maximum monthly spend allowance for new subscriptions (INR)
+    max_amount: 500.0
     
     # Access expiration date
     expiry_timestamp: "2026-12-31T23:59:59Z"
@@ -39,31 +41,37 @@ delegation_policies:
 # Mock Database of Active Subscriptions
 mock_database:
   - id: "sub_001"
-    name: "Netflix"
-    amount: 15.00
+    name: "Netflix Premium"
+    amount: 649.00
     category: "streaming"
     status: "active"
     
   - id: "sub_002"
-    name: "Spotify"
-    amount: 10.00
+    name: "Spotify Duo"
+    amount: 149.00
     category: "streaming"
     status: "active"
     
   - id: "sub_003"
-    name: "Internet (Comcast)"
-    amount: 60.00
+    name: "JioFiber Broadband"
+    amount: 999.00
     category: "utilities"
     status: "active"
     
   - id: "sub_004"
-    name: "NYT Subscription"
-    amount: 12.00
+    name: "Times of India ePaper"
+    amount: 100.00
     category: "news"
     status: "active"
     
   - id: "sub_005"
-    name: "Disney+"
-    amount: 8.00
+    name: "Disney+ Hotstar"
+    amount: 299.00
     category: "streaming"
+    status: "active"
+  
+  - id: "sub_006"
+    name: "Zomato Gold"
+    amount: 150.00
+    category: "food_delivery"
     status: "active"

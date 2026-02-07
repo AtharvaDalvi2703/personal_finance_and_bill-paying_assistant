@@ -1,3 +1,24 @@
-User: I want to subscribe to Netflix.
-Agent: Okay, checking policies.
-Agent: Allowed.
+--- Owner Scenario ---
+User: Cancel my Netflix Premium subscription.
+Agent: Thinking...
+[Policy Check] Action: CANCEL, Resource: Netflix Premium, Cost: ₹649.00
+[Policy Decision] ALLOWED: Within cancellation limit (₹800).
+Agent: SUCCESS: Subscription Netflix Premium has been successfully cancelled.
+
+--- Blocked Scenario ---
+User: Cancel the JioFiber connection, it's too expensive.
+Agent: Thinking...
+[Policy Check] Action: CANCEL, Resource: JioFiber Broadband, Category: utilities
+[Policy Decision] BLOCKED: CATEGORY BLOCK: Cannot cancel 'utilities' subscriptions autonomously.
+Agent: ACTION BLOCKED: CATEGORY BLOCK: Cannot cancel 'utilities' subscriptions autonomously.
+
+--- Delegate Scenario (Roommate) ---
+User (Delegate): Try to modify Spotify.
+[Policy Check] Action: MODIFY, Resource: Spotify Duo
+[Policy Decision] ALLOWED: User 'roommate' is authorized to manage 'Spotify Duo'.
+Result: Successfully executed 'modify' on 'Spotify Duo'.
+
+User (Delegate): Try to cancel JioFiber.
+[Policy Check] Action: CANCEL, Resource: JioFiber Broadband
+[Policy Decision] BLOCKED: User 'roommate' is not authorized to manage 'JioFiber Broadband'.
+Result: ACTION BLOCKED

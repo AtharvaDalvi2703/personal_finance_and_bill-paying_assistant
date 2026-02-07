@@ -39,16 +39,13 @@ def cancel_subscription(ctx: Context, subscription_id: str, user_role: str = "ow
     logger.info(f"Received request to cancel subscription {subscription_id} by {user_role}")
     
     # Policy Check
-    policy_result = policy_engine.evaluate_action("cancel", {
-        "subscription_id": subscription_id, 
-        "user_role": user_role
-    })
+    decision = policy_engine.can_cancel(subscription_id, requester=user_role)
     
-    if not policy_result.get("allowed"):
-        logger.warning(f"BLOCKED: Cancellation of {subscription_id} denied. Reason: {policy_result.get('reason')}")
+    if not decision.allowed:
+        logger.warning(f"BLOCKED: Cancellation of {subscription_id} denied. Reason: {decision.reason}")
         return {
             "status": "blocked",
-            "reason": policy_result.get("reason"),
+            "reason": decision.reason,
             "subscription_id": subscription_id
         }
 
@@ -72,14 +69,13 @@ def check_delegation_authority(ctx: Context, user_role: str, subscription_id: st
     Returns:
         dict: Authority status and explanation.
     """
-    policy_result = policy_engine.evaluate_action("access", {
-        "subscription_id": subscription_id, 
-        "user_role": user_role
-    })
+    # Use generic delegation check or specific action check depending on context
+    # Here we simulate checking access/modify permissions
+    decision = policy_engine.check_delegation(user_role, "modify", subscription_id)
     
     return {
-        "authorized": policy_result.get("allowed"),
-        "reason": policy_result.get("reason", "Policy check completed.")
+        "authorized": decision.allowed,
+        "reason": decision.reason
     }
 
 if __name__ == "__main__":

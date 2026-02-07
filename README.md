@@ -46,18 +46,18 @@ We use a robust architecture to ensure safety and control:
 We have three key scenarios to demonstrate the policy enforcement:
 
 1.  **✅ Allowed Action**:
-    *   **User**: "Cancel my Netflix subscription."
-    *   **Guardian**: Checks policy "Entertainment under $20/mo can be cancelled autonomously." -> **ALLOWED**.
+    *   **User**: "Cancel my Netflix Premium subscription."
+    *   **Guardian**: Checks policy "Entertainment under ₹800/mo can be cancelled autonomously." -> **ALLOWED**.
     *   **Result**: Subscription cancelled.
 
 2.  **🚫 Critical Utility Block**:
-    *   **User**: "Cancel the Comcast Internet to save money."
+    *   **User**: "Cancel the JioFiber connection to save money."
     *   **Guardian**: Checks policy "Critical Utilities (Internet, Power) cannot be cancelled by AI." -> **BLOCKED**.
     *   **Result**: "I cannot cancel the internet; it is flagged as a critical utility."
 
 3.  **🛡️ Dangerous Delegation Block**:
     *   **User**: "Let my roommate Bob have full access to manage my Spotify."
-    *   **Guardian**: Checks policy "Credential sharing and delegation to non-admins is prohibited." -> **BLOCKED**.
+    *   **Guardian**: Checks policy "Delegation only allowed for 'Entertainment' category up to ₹500/mo." -> **BLOCKED**.
     *   **Result**: "I cannot delegate access to 'Bob'. Security policy violation."
 
 ## 👥 Team Credits
