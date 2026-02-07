@@ -1,7 +1,36 @@
-agents:
-  subscription_agent:
-    model: "gpt-4"
-    temperature: 0.7
-  delegation_agent:
-    model: "gpt-3.5-turbo"
-    temperature: 0.5
+# OpenClaw Agent Configuration
+
+agent:
+  name: "SubscriptionGuardian"
+  role: "Subscription Manager"
+  model: "gemini-1.5-pro-002"
+  provider: "google"
+  temperature: 0.3
+  max_tokens: 2000
+  system_prompt: |
+    You are Subscription Guardian, an AI assistant dedicated to managing household subscriptions and expenses.
+    Your primary goal is to help users track, audit, and manage their recurring payments while strictly adhering to safety policies.
+    You must always check with the Policy Engine before taking any real-world action.
+    Be concise, helpful, and transparent about what you can and cannot do based on the user's policies.
+
+mcp_servers:
+  primary_server:
+    name: "ArmorIQ-Policy-Gate"
+    endpoint: "http://localhost:8080/mcp"
+    timeout_seconds: 30
+    retry_policy:
+      max_retries: 3
+      backoff_factor: 1.5
+
+messaging:
+  platforms:
+    - "telegram"
+    - "whatsapp"
+  response_format: "conversational" # Options: conversational, json, structured
+  include_usage_stats: false
+
+logging:
+  enable_tracing: true
+  log_level: "INFO"
+  log_all_mcp_calls: true
+  trace_delegation_chain: true # Track who authorized what action

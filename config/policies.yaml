@@ -1,4 +1,69 @@
-policies:
-  - name: "No Auto-Renew"
-    description: "Ensure subscriptions do not auto-renew without approval."
-    enabled: true
+# Policy Configuration for Subscription Guardian
+
+# Global Rules
+global_rules:
+  # Any transaction above this amount requires explicit user confirmation
+  require_confirmation_above: 50.0
+  # Log all actions taken by agents for auditing purposes
+  audit_all_actions: true
+
+# Owner Policies (Default User)
+owner_policies:
+  # Maximum amount the agent can cancel autonomously without confirmation
+  max_cancellation_amount: 20.0
+  
+  # Categories allowed for autonomous management
+  allowed_categories:
+    - "streaming"
+    - "gaming"
+    
+  # Categories blocked from autonomous cancellation (must be manually reviewed)
+  blocked_categories:
+    - "utilities"
+    - "insurance"
+
+# Delegation Policies (e.g., Roommates, Family Members)
+delegation_policies:
+  roommate:
+    # Subscriptions the delegate is allowed to modify/access
+    allowed_subscriptions:
+      - "spotify"
+      - "hulu"
+    
+    # Maximum monthly spend allowance for new subscriptions
+    max_amount: 15.0
+    
+    # Access expiration date
+    expiry_timestamp: "2026-12-31T23:59:59Z"
+
+# Mock Database of Active Subscriptions
+mock_database:
+  - id: "sub_001"
+    name: "Netflix"
+    amount: 15.00
+    category: "streaming"
+    status: "active"
+    
+  - id: "sub_002"
+    name: "Spotify"
+    amount: 10.00
+    category: "streaming"
+    status: "active"
+    
+  - id: "sub_003"
+    name: "Internet (Comcast)"
+    amount: 60.00
+    category: "utilities"
+    status: "active"
+    
+  - id: "sub_004"
+    name: "NYT Subscription"
+    amount: 12.00
+    category: "news"
+    status: "active"
+    
+  - id: "sub_005"
+    name: "Disney+"
+    amount: 8.00
+    category: "streaming"
+    status: "active"
