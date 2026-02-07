@@ -1,5 +1,0 @@
-langchain
-fastapi
-uvicorn
-requests
-python-dotenv

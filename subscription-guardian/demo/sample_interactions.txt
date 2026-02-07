@@ -1,0 +1,3 @@
+User: I want to subscribe to Netflix.
+Agent: Okay, checking policies.
+Agent: Allowed.

@@ -1,0 +1,4 @@
+policies:
+  - name: "No Auto-Renew"
+    description: "Ensure subscriptions do not auto-renew without approval."
+    enabled: true

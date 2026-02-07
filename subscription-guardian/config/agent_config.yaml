@@ -1,0 +1,7 @@
+agents:
+  subscription_agent:
+    model: "gpt-4"
+    temperature: 0.7
+  delegation_agent:
+    model: "gpt-3.5-turbo"
+    temperature: 0.5
